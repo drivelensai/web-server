@@ -13,7 +13,7 @@
 <body>
     <div class="container mt-4">
         <h1 class="text-center mb-4">Report</h1>
-        <form method="GET" action="{{ route('report.fetch') }}" class="row g-3">
+        <form method="GET" action="{{ route('report.index') }}" class="row g-3">
             @csrf
             <div class="col-md-4">
                 <label for="user_id" class="form-label">User <span class="text-danger">*</span></label>

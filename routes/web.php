@@ -10,4 +10,3 @@ Route::post('/upload-video', [ViolationController::class, 'store'])->name('video
 Route::get('/video-status/{video}', [ViolationController::class, 'status'])->name('video.upload.status');
 
 Route::get('/report', [ReportController::class, 'index'])->name('report.index');
-Route::get('/report', [ReportController::class, 'fetchData'])->name('report.fetch');

@@ -7,8 +7,10 @@ use Illuminate\Support\Carbon;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->user_id)
+            return $this->fetchData($request);
         // Получение списка пользователей для формы
         $users = DB::table('ls_users')->select('id', 'name')->get();
         return view('report.index', compact('users'));
@@ -21,6 +23,7 @@ class ReportController extends Controller
             'date_from' => 'nullable|date',
             'date_to' => 'nullable|date|after_or_equal:date_from',
         ]);
+
 
         $dateFrom = $request->input('date_from');
         $dateTo = $request->input('date_to');
