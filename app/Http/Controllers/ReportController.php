@@ -63,6 +63,8 @@ class ReportController extends Controller
         return view('report.index', [
             'users' => DB::table('ls_users')->select('id', 'name')->get(),
             'results' => $query,
+            "date_from" => $dateFrom ? (new Carbon($dateFrom))->format('Y.m.d') : "",
+            "date_to" => $dateTo ? (new Carbon($dateTo))->format('Y.m.d') : "",
         ]);
     }
 

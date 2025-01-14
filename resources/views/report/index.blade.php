@@ -28,7 +28,8 @@
             </div>
             <div class="col-md-3">
                 <label for="date_from" class="form-label">Date From</label>
-                <input type="date" name="date_from" id="date_from" class="form-control" max="{{ date('Y-m-d') }}">
+                <input type="date" name="date_from" id="date_from" class="form-control" max="{{ date('Y-m-d') }}"
+                    value="{{ now()->format('Y-m-d') }}">
             </div>
             <div class="col-md-3">
                 <label for="date_to" class="form-label">Date To</label>
@@ -40,7 +41,8 @@
         </form>
 
         @if (!empty($results))
-            <h2 class="text-center mt-5">Results</h2>
+
+            <h2 class="text-center mt-5">Results <small>{{$date_from}} - {{$date_to}}</small></h2>
             <table class="table table-bordered mt-3">
                 <thead class="table-light">
                     <tr>
@@ -66,7 +68,22 @@
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">Total count</td>
+                        <td>{{ $results->sum('images_count') }}</td>
+                        <td>{{ $results->sum('objects_count') }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6">Total money</td>
+                        <td>{{ number_format($results->sum('objects_count') / env('ANNOTATION_COUNT', 12) * 1000, 0, "", " ")}}
+                            UZS
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
+
         @endif
     </div>
 </body>
